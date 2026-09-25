@@ -21,6 +21,7 @@
     'data': [
         "security/ir.model.access.csv",
         "views/student_information_views.xml",
+        'views/class_information_views.xml'
     ],
 
     "installable": True,

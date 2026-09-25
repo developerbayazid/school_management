@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class StudentInformation(models.Model):
@@ -26,10 +26,8 @@ class StudentInformation(models.Model):
     student_image = fields.Binary(string='Image', tracking=True)
     student_document_ids = fields.Many2many('ir.attachment', string='Attachments')
     student_notes = fields.Html(string='Notes')
-    
-    
-    
-    
+    number_of_documents = fields.Integer(string='Number of Document', compute="_get_number_of_documents")
+    class_id = fields.Many2one('class.information', string='Class', tracking=True)
     
     
     def confirm_student(self):
@@ -42,3 +40,8 @@ class StudentInformation(models.Model):
         for record in self:
             if record.status == 'confirmed':
                 record.status = 'draft'
+                
+    @api.depends('student_document_ids')            
+    def _get_number_of_documents(self):
+        for record in self:
+            record.number_of_documents = len(record.student_document_ids.ids)

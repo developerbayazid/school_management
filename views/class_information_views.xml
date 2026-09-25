@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View class.information View List -->
+    <record id="view_class_information_list" model="ir.ui.view">
+        <field name="name">view.class.information.list</field>
+        <field name="model">class.information</field>
+        <field name="arch" type="xml">
+            <list editable="top">
+                <field name="name"/>
+                <field name="class_teacher_id"/>
+                <field name="number_of_seat"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- View class.information form -->
+    <!-- <record id="view_class_information_form" model="ir.ui.view">
+        <field name="name">view.class.information.form</field>
+        <field name="model">class.information</field>
+        <field name="arch" type="xml">
+            <form string="Class Information">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Name..."/>
+                        </h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record> -->
+
+    <!-- View class.information search -->
+    <!-- <record id="view_class_information_search" model="ir.ui.view">
+        <field name="name">view.class.information.search</field>
+        <field name="model">class.information</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Group By">
+                    <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
+                </group>
+            </search>
+        </field>
+    </record> -->
+
+    <!-- Action class.information -->
+    <record id="action_class_information" model="ir.actions.act_window">
+        <field name="name">Class Information</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">class.information</field>
+        <field name="view_mode">list</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new Class Information.
+            </p>
+        </field>
+    </record>
+
+
+    
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="class_information_menu_act" name="Class Information" parent="school_management.school_management_menu_root" action="action_class_information" sequence="2"/>
+
+</odoo>

@@ -13,6 +13,8 @@
                 <field name="email"/>
                 <field name="birth_certificate"/>
                 <field name="status"/>
+                <field name="number_of_documents"/>
+                <field name="class_id"/>
             </list>
         </field>
     </record>
@@ -38,6 +40,8 @@
                             <field name="email" readonly="status != 'draft'"/>
                             <field name="birth_certificate" readonly="status != 'draft'"/>
                             <field name="address"/>
+                            <field name="number_of_documents"/>
+                            <field name="class_id"/>
                         </group>
 
                         <group string="Parents Information">
@@ -88,6 +92,8 @@
                 <field name="email"/>
                 <field name="phone_number"/>
                 <field name="student_image"/>
+                <field name="number_of_documents"/>
+                <field name="class_id"/>
                 <templates>
                     <t t-name="card" class="flex-row">
                         <aside class="o_kanban_aside_full">
@@ -109,6 +115,14 @@
                             <div t-if="record.phone_number.raw_value">
                                 <i class="fa fa-fw me-1 fa-phone text-primary" title="Phone"/>
                                 <field name="phone_number"/>
+                            </div>
+                            <div t-if="record.number_of_documents.raw_value">
+                                <i class="fa fa-fw me-1 fa-files-o text-primary" title="Number Of Documents"/>
+                                <field name="number_of_documents"/>
+                            </div>
+                            <div t-if="record.class_id.raw_value">
+                                <i class="fa fa-fw me-1 fa-graduation-cap text-primary" title="Class"/>
+                                <field name="class_id"/>
                             </div>
                             
                         </main>

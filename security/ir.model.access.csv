@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_student_information,student.information,model_student_information,base.group_user,1,1,1,1
 access_student_study_history_manager,student_study_history_manager,model_student_study_history,base.group_user,1,1,1,1
 access_other_school_manager,other_school_manager,model_others_school,base.group_user,1,1,1,1
+access_class_information_manager,class_information_manager,model_class_information,base.group_user,1,1,1,1
