@@ -11,6 +11,7 @@
                 <field name="roll_number"/>
                 <field name="phone_number"/>
                 <field name="email"/>
+                <field name="gender"/>
                 <field name="birth_certificate"/>
                 <field name="status"/>
                 <field name="number_of_documents"/>
@@ -38,10 +39,11 @@
                             <field name="roll_number" readonly="status != 'draft'"/>
                             <field name="phone_number" readonly="status != 'draft'"/>
                             <field name="email" readonly="status != 'draft'"/>
+                            <field name="gender" readonly="status != 'draft'"/>
                             <field name="birth_certificate" readonly="status != 'draft'"/>
                             <field name="address"/>
                             <field name="number_of_documents"/>
-                            <field name="class_id"/>
+                            <field name="class_id" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
                         </group>
 
                         <group string="Parents Information">
@@ -94,6 +96,7 @@
                 <field name="student_image"/>
                 <field name="number_of_documents"/>
                 <field name="class_id"/>
+                <field name="gender"/>
                 <templates>
                     <t t-name="card" class="flex-row">
                         <aside class="o_kanban_aside_full">
@@ -124,6 +127,10 @@
                                 <i class="fa fa-fw me-1 fa-graduation-cap text-primary" title="Class"/>
                                 <field name="class_id"/>
                             </div>
+                            <div t-if="record.gender.raw_value">
+                                <i class="fa fa-fw me-1 fa-venus-mars text-primary" title="Gender"/>
+                                <field name="gender"/>
+                            </div>
                             
                         </main>
                     </t>
@@ -134,35 +141,29 @@
     
 
     <!-- View student.information search -->
-    <!-- <record id="view_student_information_search" model="ir.ui.view">
+    <record id="view_student_information_search" model="ir.ui.view">
         <field name="name">view.student.information.search</field>
         <field name="model">student.information</field>
         <field name="arch" type="xml">
-            <search>
-                <group expand="1" string="Group By">
-                    <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
+            <search string="Search Student">
+                <field name="name" filter_domain="[('display_name', 'ilike', self)]"/>
+                <field name="email" filter_domain="[('email', 'ilike', self)]"/>
+                <field name="phone_number" filter_domain="[('phone_number', 'ilike', self)]"/>
+                <field name="roll_number" filter_domain="[('roll_number', 'ilike', self)]"/>
+                <separator/>
+                    <filter string="Male" name="gender_male" domain="[('gender', '=', 'male')]"/>
+                    <filter string="Female" name="gender_female" domain="[('gender', '=', 'female')]"/>
+                    <filter string="Other" name="gender_other" domain="[('gender', '=', 'other')]"/>
+                <separator/>
+                <group name="group_by">
+                    <filter string="Gender" name="gender" domain="[]" context="{'group_by':'gender'}"/>
                 </group>
             </search>
         </field>
-    </record> -->
-
-    <!-- Action student.information -->
-    <!-- <record id="action_student_information" model="ir.actions.act_window">
-        <field name="name">Student Information</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">student.information</field>
-        <field name="view_mode">list,form</field>
-        <field name="domain">[]</field>
-        <field name="context">{}</field>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                There is no examples click here to add new Student Information.
-            </p>
-        </field>
-    </record> -->
+    </record>
 
 
-    <!-- model.name action window -->
+    <!-- student.information action window -->
     <record id="student_information_action" model="ir.actions.act_window">
         <field name="name">Student Information</field>
         <field name="type">ir.actions.act_window</field>

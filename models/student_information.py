@@ -23,11 +23,17 @@ class StudentInformation(models.Model):
     
     
     previous_record_ids = fields.One2many(comodel_name='student.study.history', inverse_name='student_id')
-    student_image = fields.Binary(string='Image', tracking=True)
+    student_image = fields.Binary(string='Image')
     student_document_ids = fields.Many2many('ir.attachment', string='Attachments')
     student_notes = fields.Html(string='Notes')
     number_of_documents = fields.Integer(string='Number of Document', compute="_get_number_of_documents")
     class_id = fields.Many2one('class.information', string='Class', tracking=True)
+    gender = fields.Selection(selection=[
+            ('male', 'Male'),
+            ('female', 'Female'),
+            ('other', 'Other'),
+        ], string='Gender', tracking=True)
+    
     
     
     def confirm_student(self):
