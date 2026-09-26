@@ -18,11 +18,12 @@
         "portal"
     ],
 
-    'data': [
+    "data": [
         "security/ir.model.access.csv",
-        'security/student_security.xml',
+        "security/student_security.xml",
+        "views/class_information_views.xml",
         "views/student_information_views.xml",
-        'views/class_information_views.xml',
+        "report/student_information_report.xml"
     ],
 
     "installable": True,

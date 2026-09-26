@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="report_student_information" model="ir.actions.report">
+        <field name="name">Student Details</field>
+        <field name="model">student.information</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_management.report_student_information_view</field>
+        <field name="report_file">school_management.report_student_information</field>
+        <field name="print_report_name">'Student - %s' % object.roll_number</field>
+        <field name="binding_model_id" ref="model_student_information"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_student_information_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h4 class="font-bold">Student Details</h4>
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <span t-field="doc.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Roll Number</th>
+                                <td>
+                                    <span t-field="doc.roll_number"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number</th>
+                                <td>
+                                    <span t-field="doc.phone_number"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>
+                                    <span t-field="doc.email"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Class</th>
+                                <td>
+                                    <span t-field="doc.class_id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Gender</th>
+                                <td>
+                                    <span t-field="doc.gender"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Father Name</th>
+                                <td>
+                                    <span t-field="doc.father_name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Mother Name</th>
+                                <td>
+                                    <span t-field="doc.mother_name"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
