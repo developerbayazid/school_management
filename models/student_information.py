@@ -1,3 +1,5 @@
+from os import name
+
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError, ValidationError
 
@@ -45,8 +47,16 @@ class StudentInformation(models.Model):
                 
     def reset_student(self):
         for record in self:
-            if record.status == 'confirmed':
-                record.status = 'draft'
+            return{
+                "name": _('Draft Reason'),
+                "type": "ir.actions.act_window",
+                "res_model": "draft.reason",
+                "view_mode": "form",
+                "target": "new",
+                "context": {
+                    "default_student_id": record.id,
+                },
+            }
                 
     @api.depends('student_document_ids')            
     def _get_number_of_documents(self):

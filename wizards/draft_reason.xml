@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View draft.reason form -->
+    <record id="view_draft_reason_form" model="ir.ui.view">
+        <field name="name">view.draft.reason.form</field>
+        <field name="model">draft.reason</field>
+        <field name="arch" type="xml">
+            <form string="Draft Reason">
+                <group>
+                    <field name="student_id" invisible="1"/>
+                    <field name="reason" placeholder="Enter the reason for drafting the student..."/>
+                    
+                </group>
+                
+                <footer>
+                    <button name="add" type="object" string="Mark as Draft" class="oe_highlight"/>
+                    <button special="cancel" string="Discard"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action draft.reason -->
+    <record id="action_draft_reason" model="ir.actions.act_window">
+        <field name="name">Draft Reason</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">draft.reason</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_draft_reason_form"/>
+        <field name="binding_model_id" ref="school_management.model_student_information"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
