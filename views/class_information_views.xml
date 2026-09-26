@@ -61,6 +61,6 @@
 
     
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="class_information_menu_act" name="Class Information" parent="school_management.school_management_menu_root" action="action_class_information" sequence="2"/>
+    <menuitem id="class_information_menu_act" groups="school_management.group_school_management_admin" name="Class Information" parent="school_management.school_management_menu_root" action="action_class_information" sequence="2"/>
 
 </odoo>
