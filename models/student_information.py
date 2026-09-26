@@ -1,4 +1,5 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from odoo.exceptions import UserError, ValidationError
 
 
 class StudentInformation(models.Model):
@@ -51,3 +52,31 @@ class StudentInformation(models.Model):
     def _get_number_of_documents(self):
         for record in self:
             record.number_of_documents = len(record.student_document_ids.ids)
+            
+            
+    @api.constrains('phone_number')
+    def _verify_phone_number(self):
+        for student in self:
+            existing_student = self.env['student.information'].search([('phone_number', '=', student.phone_number), ('id', '!=', student.id)])
+            if existing_student:
+                raise ValidationError(_("Phone number must be unique. The phone number '%s' is already used by another student.") % student.phone_number)
+            if not student.phone_number.isdigit():
+                raise ValidationError(_("Phone number must contain only digits."))
+            
+            
+    @api.constrains('email')
+    def _verify_email(self):
+        for student in self:
+            existing_student = self.env['student.information'].search([('email', '=', student.email), ('id', '!=', student.id)])
+            if existing_student:
+                raise ValidationError(_("Email must be unique. The email '%s' is already used by another student.") % student.email)
+            if student.email and not self.env['res.partner'].sudo().check_email([student.email]):
+                raise ValidationError(_("Invalid email address."))
+            
+            
+    @api.constrains('roll_number')
+    def _verify_roll_number(self):
+        for student in self:
+            existing_student = self.env['student.information'].search([('roll_number', '=', student.roll_number), ('id', '!=', student.id)])
+            if existing_student:
+                raise ValidationError(_("Roll number must be unique. The roll number '%s' is already used by another student.") % student.roll_number)
