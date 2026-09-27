@@ -23,8 +23,10 @@
         "security/student_security.xml",
         "views/class_information_views.xml",
         "views/student_information_views.xml",
-        "report/student_information_report.xml",
         "wizards/draft_reason.xml",
+        "report/student_information_report.xml",
+        "views/student_details_website_template.xml",
+        "views/student_profile.xml",
     ],
 
     "installable": True,

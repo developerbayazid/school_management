@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="portal_my_student_details" name="Student Details">
+        <t t-call="portal.portal_layout">
+           <div class="container mt16 mb16">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Student Details</h1>
+                        <p>Welcome to the Student Details page. Here you can find information about students.</p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Roll Number</th>
+                                    <th>Class</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="students" t-as="student">
+                                    <td>
+                                        <t t-esc="student_index + 1"/>
+                                    </td>
+
+                            <td>
+                                <a t-att-href="'/student/details/%s' % student.id"
+                                class="text-decoration-none fw-semibold">
+
+                                    <t t-esc="student.name"/>
+
+                                </a>
+                            </td>
+
+                            <td>
+                                <span class="badge text-bg-secondary">
+                                    <t t-esc="student.roll_number"/>
+                                </span>
+                            </td>
+
+                            <td>
+                                <t t-esc="student.class_id.name or '-'"/>
+                            </td>
+
+                            <td>
+                                <t t-esc="student.phone_number or '-'"/>
+                            </td>
+
+                            <td>
+                                <t t-esc="student.email or '-'"/>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

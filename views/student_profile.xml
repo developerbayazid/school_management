@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="student_profile" name="Student Profile">
+
+    <t t-call="portal.portal_layout">
+
+        <div class="container py-5">
+
+            <!-- Back Button -->
+            <div class="mb-4">
+
+                <a href="/student/details"
+                   class="btn btn-outline-secondary">
+
+                    <i class="fa fa-arrow-left me-1"/>
+                    Back to Students
+
+                </a>
+
+            </div>
+
+
+            <!-- Student Profile -->
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body p-4">
+
+                    <div class="row">
+
+                        <!-- Student Image -->
+                        <div class="col-md-3 text-center mb-4 mb-md-0">
+
+                            <t t-if="student.student_image">
+
+                                <img
+                                    t-att-src="'data:image/png;base64,%s' % student.student_image.decode()"
+                                    class="img-fluid rounded-circle"
+                                    style="width: 160px; height: 160px; object-fit: cover;"
+                                />
+
+                            </t>
+
+                            <t t-else="">
+
+                                <div
+                                    class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto"
+                                    style="width: 160px; height: 160px;"
+                                >
+                                    <i class="fa fa-user fa-4x text-muted"/>
+                                </div>
+
+                            </t>
+
+                        </div>
+
+
+                        <!-- Basic Information -->
+                        <div class="col-md-9">
+
+                            <div class="d-flex justify-content-between align-items-start mb-4">
+
+                                <div>
+
+                                    <h2 class="mb-1">
+                                        <t t-esc="student.name"/>
+                                    </h2>
+
+                                    <p class="text-muted mb-0">
+                                        Roll Number:
+                                        <strong>
+                                            <t t-esc="student.roll_number"/>
+                                        </strong>
+                                    </p>
+
+                                </div>
+
+
+                                <t t-if="student.status == 'confirmed'">
+
+                                    <span class="badge text-bg-success">
+                                        Confirmed
+                                    </span>
+
+                                </t>
+
+                                <t t-else="">
+
+                                    <span class="badge text-bg-warning">
+                                        Draft
+                                    </span>
+
+                                </t>
+
+                            </div>
+
+
+                            <!-- Information -->
+                            <div class="row g-4">
+
+                                <div class="col-md-6">
+
+                                    <small class="text-muted">
+                                        Phone Number
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        <t t-esc="student.phone_number or '-'"/>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <small class="text-muted">
+                                        Email
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        <t t-esc="student.email or '-'"/>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <small class="text-muted">
+                                        Class
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        <t t-esc="student.class_id.name or '-'"/>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <small class="text-muted">
+                                        Gender
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        <t t-esc="dict(
+                                            student._fields['gender'].selection
+                                        ).get(student.gender, '-')"/>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <small class="text-muted">
+                                        Father's Name
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        <t t-esc="student.father_name or '-'"/>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <small class="text-muted">
+                                        Mother's Name
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        <t t-esc="student.mother_name or '-'"/>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <small class="text-muted">
+                                        Birth Certificate
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        <t t-esc="student.birth_certificate or '-'"/>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <small class="text-muted">
+                                        Address
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        <t t-esc="student.address or '-'"/>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Notes -->
+            <t t-if="student.student_notes">
+
+                <div class="card shadow-sm border-0 mt-4">
+
+                    <div class="card-body">
+
+                        <h5 class="mb-3">
+                            Notes
+                        </h5>
+
+                        <div t-field="student.student_notes"/>
+
+                    </div>
+
+                </div>
+
+            </t>
+
+        </div>
+
+    </t>
+
+</template>
+</odoo>
